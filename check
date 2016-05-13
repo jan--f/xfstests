@@ -63,6 +63,7 @@ usage()
 check options
     -nfs                test NFS
     -cifs               test CIFS
+    -ceph               test CephFS
     -overlay		test overlay
     -tmpfs              test TMPFS
     -l			line mode diff
@@ -212,6 +213,7 @@ while [ $# -gt 0 ]; do
 	-cifs)		FSTYP=cifs ;;
 	-overlay)	FSTYP=overlay ;;
 	-tmpfs)		FSTYP=tmpfs ;;
+        -ceph)          FSTYP=ceph ;;
 
 	-g)	group=$2 ; shift ;
 		GROUP_LIST="$GROUP_LIST ${group//,/ }"

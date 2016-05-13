@@ -147,6 +147,9 @@ case "$FSTYP" in
 	 ;;
     cifs)
 	 ;;
+    ceph)
+      	# just kludging away
+	;;
     overlay)
 	 ;;
     reiser4)
@@ -687,6 +690,9 @@ _test_mkfs()
     cifs)
 	# do nothing for cifs
 	;;
+    ceph)
+      	# just kludging away
+	;;
     overlay)
 	# do nothing for overlay
 	;;
@@ -771,6 +777,10 @@ _scratch_mkfs()
     cifs)
 	# unable to re-create CIFS, just remove all files in $SCRATCH_MNT to
 	# avoid EEXIST caused by the leftover files created in previous runs
+        _scratch_cleanup_files
+	;;
+    ceph)
+      	# just kludging away
         _scratch_cleanup_files
 	;;
     overlay)
@@ -1342,6 +1352,15 @@ _require_scratch_nocheck()
 			_notrun "this test requires a valid \$SCRATCH_MNT"
 		fi
 		;;
+        ceph)
+		echo $SCRATCH_DEV | grep -q ":/" > /dev/null 2>&1
+		if [ -z "$SCRATCH_DEV" -o "$?" != "0" ]; then
+			_notrun "this test requires a valid \$SCRATCH_DEV"
+		fi
+		if [ ! -d "$SCRATCH_MNT" ]; then
+			_notrun "this test requires a valid \$SCRATCH_MNT"
+		fi
+		;;
 	cifs)
 		echo $SCRATCH_DEV | grep -q "//" > /dev/null 2>&1
 		if [ -z "$SCRATCH_DEV" -o "$?" != "0" ]; then
@@ -1425,6 +1444,15 @@ _require_test()
 		fi
 		if [ ! -d "$TEST_DIR" ]; then
 			_notrun "this test requires a valid \$TEST_DIR"
+		fi
+		;;
+	ceph)
+		echo $TEST_DEV | grep -q ":/" > /dev/null 2>&1
+		if [ -z "$TEST_DEV" -o "$?" != "0" ]; then
+			_notrun "this test requires a valid \$TEST_DEV"
+		fi
+		if [ ! -d "$TEST_DIR" ]; then
+		     _notrun "this test requires a valid \$TEST_DIR"
 		fi
 		;;
 	cifs)
@@ -2378,6 +2406,9 @@ _check_test_fs()
     cifs)
 	# no way to check consistency for cifs
 	;;
+    ceph)
+      	# just kludging away
+	;;
     overlay)
 	# no way to check consistency for overlay
 	;;
@@ -2421,6 +2452,9 @@ _check_scratch_fs()
 	;;
     cifs)
 	# Don't know how to check a CIFS filesystem, yet.
+	;;
+    ceph)
+      	# just kludging away
 	;;
     overlay)
 	# no way to check consistency for overlay

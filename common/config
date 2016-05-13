@@ -293,6 +293,9 @@ _mount_opts()
 	cifs)
 		export MOUNT_OPTIONS=$CIFS_MOUNT_OPTIONS
 		;;
+        ceph)
+                export MOUNT_OPTIONS=$CEPHFS_MOUNT_OPTIONS
+                ;;
 	overlay)
 		export MOUNT_OPTIONS=$OVERLAY_MOUNT_OPTIONS
 		;;
@@ -327,6 +330,9 @@ _mount_opts()
 _test_mount_opts()
 {
 	case $FSTYP in
+        ceph)
+                export TEST_FS_MOUNT_OPTS=$CEPHFS_MOUNT_OPTIONS
+                ;;
 	cifs)
 		export TEST_FS_MOUNT_OPTS=$CIFS_MOUNT_OPTIONS
 		;;
@@ -352,6 +358,9 @@ _mkfs_opts()
 	cifs)
 		export MKFS_OPTIONS=$CIFS_MKFS_OPTIONS
 		;;
+        ceph)
+                export MKFS_OPTIONS=$CEPHFS_MKFS_OPTIONS
+                ;;
 	reiserfs)
 		export MKFS_OPTIONS="$REISERFS_MKFS_OPTIONS -q"
 		;;
