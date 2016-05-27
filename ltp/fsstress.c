@@ -16,6 +16,14 @@
  * Inc.,  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+#include <linux/fs.h>
+#ifndef FS_IOC_GETFLAGS
+#define FS_IOC_GETFLAGS                 _IOR('f', 1, long)
+#endif
+#ifndef FS_IOC_SETFLAGS
+#define FS_IOC_SETFLAGS                 _IOW('f', 2, long)
+#endif
+
 #include "global.h"
 
 #ifdef HAVE_ATTR_XATTR_H
@@ -32,14 +40,6 @@
 #endif
 #ifdef HAVE_SYS_PRCTL_H
 #include <sys/prctl.h>
-#endif
-
-#include <linux/fs.h>
-#ifndef FS_IOC_GETFLAGS
-#define FS_IOC_GETFLAGS                 _IOR('f', 1, long)
-#endif
-#ifndef FS_IOC_SETFLAGS
-#define FS_IOC_SETFLAGS                 _IOW('f', 2, long)
 #endif
 
 #include <math.h>

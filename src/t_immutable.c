@@ -38,10 +38,10 @@
 #include <libgen.h>
 #include <sys/acl.h>
 #include <attr/xattr.h>
+#include <linux/fs.h>
 #include <xfs/xfs.h>
 #include <xfs/handle.h>
 #include <xfs/jdm.h>
-#include <linux/fs.h>
 #include <linux/magic.h>
 
 #ifndef XFS_SUPER_MAGIC
